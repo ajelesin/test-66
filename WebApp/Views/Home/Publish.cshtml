@@ -1,0 +1,27 @@
+﻿@model WebApp.Models.OrderType
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+
+    <div style="margin-top: 15px;">
+        <label style="width: 125px; display: inline-block;" for="Price">Price per cake</label>
+        <input type="text" id="Price" name="Price" />
+    </div>
+
+    <div>
+        <label style="width: 125px; display: inline-block;" for="TotalAmount">Amount of cakes</label>
+        <input type="text" id="TotalAmount" name="TotalAmount" />
+    </div>
+
+    <div>
+        <label style="width: 125px; display: inline-block;" for="Note">Note</label>
+        <input type="text" id="Note" name="Note"/>
+    </div>
+    
+    <input type="hidden" value="@Model" id="OrderType" name="OrderType" />
+
+    <div>
+        <input type="submit" value="@Model"/>
+    </div>
+    
+}

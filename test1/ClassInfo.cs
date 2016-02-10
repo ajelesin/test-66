@@ -19,7 +19,7 @@ namespace test1
             }
 
             Methods?
-                .Select(o => $"  - {Class?.FullName}.{o?.Name}")
+                .Select(o => "  - {Class?.FullName}.{o?.Name}")
                 .ForEach(o => str.AppendLine(o));
 
             return str.ToString();
