@@ -21,14 +21,14 @@
     }
 <table>
     <tr>
-        <td style="padding-right: 50px;">
+        <td style="padding-right: 50px; vertical-align: top">
             <div style="margin-top: 15px; font-weight: bold;">Buy cakes</div>
             @Html.Partial("Publish", OrderType.Buy)
 
             <div style="margin-top: 15px; font-weight: bold;">Sell orders</div>
             @Html.Action("SellOrders", "Home")
         </td>
-        <td>
+        <td style="vertical-align: top">
             <div style="margin-top: 15px; font-weight: bold;">Sell cakes</div>
             @Html.Partial("Publish", OrderType.Sell)
 

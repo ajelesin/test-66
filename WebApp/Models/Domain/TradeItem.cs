@@ -1,7 +1,6 @@
 ﻿using System;
-using WebApp.Models.Domain;
 
-namespace WebApp.Models
+namespace WebApp.Models.Domain
 {
     public class TradeItem
     {

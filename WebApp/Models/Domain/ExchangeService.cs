@@ -72,10 +72,10 @@ namespace WebApp.Models.Domain
 
                 order.Date = DateTime.Now;
                 order.AvailableAmount = order.TotalAmount;
-                
-                MakeDeals(order);
 
                 _repository.AddOrder(order);
+                MakeDeals(order);
+
                 return Result.Ok();
             }
             catch (Exception ex)
@@ -89,7 +89,7 @@ namespace WebApp.Models.Domain
             if (order.OrderType == OrderType.Sell)
             {
                 var rightOrders = _repository.GetOrders()
-                    .Where(o => o.AvailableAmount > 0 && o.Price <= order.Price && o.OrderType == OrderType.Buy)
+                    .Where(o => o.AvailableAmount > 0 && o.Price >= order.Price && o.OrderType == OrderType.Buy)
                     .OrderBy(o => o.Date)
                     .ToList();
                 if (rightOrders.Count == 0)
@@ -108,18 +108,19 @@ namespace WebApp.Models.Domain
                         Amount = amount,
                         BuyOrder = order,
                         SellOrder = rightOrder,
-                        Price = order.Price,
+                        Price = rightOrder.Price,
                         TradeDate = DateTime.Now
                     };
-                    _repository.AddTradeItem(tradeItem);
                     _repository.UpdateOrder(rightOrder);
+                    _repository.UpdateOrder(order);
+                    _repository.AddTradeItem(tradeItem);
                 }
             }
 
             if (order.OrderType == OrderType.Buy)
             {
                 var rightOrders = _repository.GetOrders()
-                    .Where(o => o.AvailableAmount > 0 && o.Price >= order.Price && o.OrderType == OrderType.Sell)
+                    .Where(o => o.AvailableAmount > 0 && o.Price <= order.Price && o.OrderType == OrderType.Sell)
                     .OrderBy(o => o.Date)
                     .ToList();
                 if (rightOrders.Count == 0)
@@ -141,8 +142,9 @@ namespace WebApp.Models.Domain
                         Price = rightOrder.Price,
                         TradeDate = DateTime.Now
                     };
-                    _repository.AddTradeItem(tradeItem);
                     _repository.UpdateOrder(rightOrder);
+                    _repository.UpdateOrder(order);
+                    _repository.AddTradeItem(tradeItem);
                 }
             }
         }

@@ -10,7 +10,7 @@ namespace WebApp.Controllers
 
         public HomeController()
         {
-            var repository = new FakeRepository();
+            var repository = new SqlRepository();
             _service = new ExchangeService(repository);
         }
 

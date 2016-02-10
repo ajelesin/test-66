@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using WebApp.Models.DataAccess;
 
 namespace WebApp
 {
@@ -19,6 +17,8 @@ namespace WebApp
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            Database.SetInitializer(new CreateDatabaseIfNotExists<ExchangeContext>());
         }
     }
 }
