@@ -1,0 +1,17 @@
+﻿@model IEnumerable<MvcApp.Models.Domain.Order>
+
+<table>
+    <tr>
+        <td>Price</td>
+        <td>Amount</td>
+        <td>Note</td>
+    </tr>
+    @foreach (var order in @Model)
+    {
+        <tr>
+            <td>@order.Price</td>
+            <td>@order.AvailableAmount</td>
+            <td>@order.Note</td>
+        </tr>
+    }
+</table>

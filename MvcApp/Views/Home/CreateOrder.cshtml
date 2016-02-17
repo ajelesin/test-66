@@ -1,0 +1,39 @@
+﻿@model MvcApp.Models.Domain.Order
+
+@using (Ajax.BeginForm("CreateOrder", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "OrderForm" }))
+{
+    <div id="@string.Format("{0}OrderForm", Model.OrderType)">
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(o => o.Price)
+                </td>
+                <td>
+                    <div>@Html.EditorFor(o => o.Price)</div>
+                    <div>@Html.ValidationMessageFor(o => o.Price)</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(o => o.TotalAmount)
+                </td>
+                <td>
+                    <div>@Html.EditorFor(o => o.TotalAmount)</div>
+                    <div>@Html.ValidationMessageFor(o => o.TotalAmount)</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(o => o.Note)
+                </td>
+                <td>
+                    <div>@Html.EditorFor(o => o.Note)</div>
+                    <div>@Html.ValidationMessageFor(o => o.Note)</div>
+                </td>
+            </tr>
+        </table>
+
+        @Html.HiddenFor(o => o.OrderType)
+        <input type="submit" value="@Model.OrderType Cake"/>
+    </div>
+}

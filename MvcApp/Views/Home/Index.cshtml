@@ -1,0 +1,33 @@
+﻿@using MvcApp.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+<table>
+    <tr>
+        <td>
+            <div><b>Buy Cake</b></div>
+            @Html.Action("CreateOrder", new {orderType = OrderType.Buy})
+        </td>
+        <td>
+            <div><b>Sell Cake</b></div>
+            @Html.Action("CreateOrder", new {orderType = OrderType.Sell})
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div>Sell Orders</div>
+            @Html.Action("SellOrdersListView")
+        </td>
+        <td>
+            <div>Buy Orders</div>
+            @Html.Action("BuyOrdersListView")
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div><b>Trade History</b></div>
+            @Html.Action("TradesHistoryView")
+        </td>
+    </tr>
+</table>

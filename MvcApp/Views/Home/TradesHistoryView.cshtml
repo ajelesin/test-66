@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MvcApp.Models.Domain.Trade>
+
+
+<table>
+    <tr>
+        <td>Date</td>
+        <td>Buy Date</td>
+        <td>Sell Date</td>
+        <td>Price</td>
+        <td>Amount</td>
+        <td>Buy Note</td>
+        <td>Sell Note</td>
+    </tr>
+    @foreach (var trade in Model)
+    {
+        <tr>
+            <td>@trade.TradeDate</td>
+            <td>@trade.BuyOrder.Date</td>
+            <td>@trade.SellOrder.Date</td>
+            <td>@trade.Price</td>
+            <td>@trade.Amount</td>
+            <td>@trade.BuyOrder.Note</td>
+            <td>@trade.SellOrder.Note</td>
+        </tr>
+    }
+
+
+</table>
