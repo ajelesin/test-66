@@ -7,8 +7,8 @@
 
     public class FakeRepository : IRepository
     {
-        private readonly List<Order> _orders;
-        private readonly List<Trade> _tradeHistory;
+        private static List<Order> _orders;
+        private static List<Trade> _tradeHistory;
 
         public FakeRepository()
         {
@@ -52,31 +52,26 @@
             // nothing to do here
         }
 
-        public static FakeRepository SomeData
+        public static void FillSomeData()
         {
-            get
+            _orders.AddRange(new List<Order>
             {
-                var repo = new FakeRepository();
-                repo._orders.AddRange(new List<Order>
-                {
-                    new Order {Id = 0, TotalAmount = 5, AvailableAmount = 5, Price = 20, OrderType = OrderType.Sell, Date = DateTime.Now},
-                    new Order {Id = 1, TotalAmount = 2, AvailableAmount = 2, Price = 21, OrderType = OrderType.Sell, Date = DateTime.Now},
-                    new Order {Id = 2, TotalAmount = 1, AvailableAmount = 1, Price = 25.5m, OrderType = OrderType.Sell, Date = DateTime.Now},
-                    new Order {Id = 3, TotalAmount = 4,AvailableAmount = 4,  Price = 30, OrderType = OrderType.Sell, Date = DateTime.Now},
-                    new Order {Id = 4, TotalAmount = 1, AvailableAmount = 1, Price = 45, OrderType = OrderType.Sell, Date = DateTime.Now},
-                    new Order {Id = 5, TotalAmount = 5,AvailableAmount = 5,  Price = 19, OrderType = OrderType.Buy, Date = DateTime.Now},
-                    new Order {Id = 6, TotalAmount = 2, AvailableAmount = 2, Price = 18, OrderType = OrderType.Buy, Date = DateTime.Now},
-                    new Order {Id = 7, TotalAmount = 1, AvailableAmount = 1, Price = 15, OrderType = OrderType.Buy, Date = DateTime.Now},
-                    new Order {Id = 8, TotalAmount = 50, AvailableAmount = 50, Price = 10, OrderType = OrderType.Buy, Date = DateTime.Now},
-                    new Order {Id = 9, TotalAmount = 2,AvailableAmount = 2,  Price = 9, OrderType = OrderType.Buy, Date = DateTime.Now},
+                new Order {Id = 0, TotalAmount = 5, AvailableAmount = 5, Price = 20, OrderType = OrderType.Sell, Date = DateTime.Now},
+                new Order {Id = 1, TotalAmount = 2, AvailableAmount = 2, Price = 21, OrderType = OrderType.Sell, Date = DateTime.Now},
+                new Order {Id = 2, TotalAmount = 1, AvailableAmount = 1, Price = 25.5m, OrderType = OrderType.Sell, Date = DateTime.Now},
+                new Order {Id = 3, TotalAmount = 4,AvailableAmount = 4,  Price = 30, OrderType = OrderType.Sell, Date = DateTime.Now},
+                new Order {Id = 4, TotalAmount = 1, AvailableAmount = 1, Price = 45, OrderType = OrderType.Sell, Date = DateTime.Now},
+                new Order {Id = 5, TotalAmount = 5,AvailableAmount = 5,  Price = 19, OrderType = OrderType.Buy, Date = DateTime.Now},
+                new Order {Id = 6, TotalAmount = 2, AvailableAmount = 2, Price = 18, OrderType = OrderType.Buy, Date = DateTime.Now},
+                new Order {Id = 7, TotalAmount = 1, AvailableAmount = 1, Price = 15, OrderType = OrderType.Buy, Date = DateTime.Now},
+                new Order {Id = 8, TotalAmount = 50, AvailableAmount = 50, Price = 10, OrderType = OrderType.Buy, Date = DateTime.Now},
+                new Order {Id = 9, TotalAmount = 2,AvailableAmount = 2,  Price = 9, OrderType = OrderType.Buy, Date = DateTime.Now},
+            });
+            _tradeHistory.Add(new Trade{Id = 0,Price = 20,Amount = 3,
+                    BuyOrder = new Order {TotalAmount = 3, Price = 20, Date = DateTime.Now},
+                    SellOrder = new Order {TotalAmount = 3, Price = 20, Date = DateTime.Now},
+                    TradeDate = DateTime.Now
                 });
-                repo._tradeHistory.Add(new Trade{Id = 0,Price = 20,Amount = 3,
-                        BuyOrder = new Order {TotalAmount = 3, Price = 20, Date = DateTime.Now},
-                        SellOrder = new Order {TotalAmount = 3, Price = 20, Date = DateTime.Now},
-                        TradeDate = DateTime.Now
-                    });
-                return repo;
-            }
         }
     }
 }

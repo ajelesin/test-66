@@ -16,18 +16,60 @@
     </tr>
     <tr>
         <td>
-            <div>Sell Orders</div>
-            @Html.Action("SellOrdersListView")
+            <div><b>Sell Orders</b></div>
+            <div id="SellOrders">
+                @Html.Action("GetSellOrders")
+            </div>
         </td>
         <td>
-            <div>Buy Orders</div>
-            @Html.Action("BuyOrdersListView")
+            <div><b>Buy Orders</b></div>
+            <div id="BuyOrders">
+                @Html.Action("GetBuyOrders")
+            </div>
         </td>
     </tr>
     <tr>
         <td colspan="2">
             <div><b>Trade History</b></div>
-            @Html.Action("TradesHistoryView")
+            <div id="TradeHistory">
+                @Html.Action("GetTradeHistory")
+            </div>
         </td>
     </tr>
 </table>
+
+@section scripts
+{
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        $(function() {
+            var service = $.connection.exchangeHub;
+            service.client.refresh = function () {
+                $.ajax({
+                    url: '/Home/GetSellOrders',
+                    dataType: 'html',
+                    success: function (data) {
+                        $('#SellOrders').html(data);
+                    }
+                });
+                $.ajax({
+                    url: '/Home/GetBuyOrders',
+                    dataType: 'html',
+                    success: function(data) {
+                        $('#BuyOrders').html(data);
+                    }
+                });
+                $.ajax({
+                    url: '/Home/GetTradeHistory',
+                    dataType: 'html',
+                    success: function (data) {
+                        $('#TradeHistory').html(data);
+                    }
+                });
+            }
+
+            $.connection.hub.start();
+
+        });
+    </script>
+}

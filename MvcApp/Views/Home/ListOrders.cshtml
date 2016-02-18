@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<MvcApp.Models.Domain.Order>
 
+@if (Model == null || !Model.Any())
+{
+    <div>There is no orders</div>
+}
+else
+{
 <table>
     <tr>
         <td>Price</td>
@@ -14,4 +20,5 @@
             <td>@order.Note</td>
         </tr>
     }
-</table>
+</table>  
+}

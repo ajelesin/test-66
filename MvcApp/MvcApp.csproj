@@ -145,7 +145,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Connection\ExchangeConnection.cs" />
+    <Compile Include="Connection\ExchangeHub.cs" />
     <Compile Include="Connection\Startup.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -250,7 +250,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\CreateOrder.cshtml" />
     <Content Include="Views\Home\ListOrders.cshtml" />
-    <Content Include="Views\Home\TradesHistoryView.cshtml" />
+    <Content Include="Views\Home\TradeHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

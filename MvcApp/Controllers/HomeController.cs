@@ -1,7 +1,8 @@
 ﻿namespace MvcApp.Controllers
 {
-    using System.Runtime.InteropServices;
     using System.Web.Mvc;
+    using Connection;
+    using Microsoft.AspNet.SignalR;
     using Models;
     using Models.DataAccess;
     using Models.Domain;
@@ -12,7 +13,7 @@
 
         public HomeController()
         {
-            var repository = FakeRepository.SomeData;
+            var repository = new SqlRepository();
             _service = new ExchangeService(repository);
         }
 
@@ -27,8 +28,10 @@
             if (ModelState.IsValid)
             {
                 _service.ProcessOrder(order);
+                var context = GlobalHost.ConnectionManager.GetHubContext<ExchangeHub>();
+                context.Clients.All.refresh();
             }
-            return PartialView("CreateOrder", /*order*/new Order { OrderType = order.OrderType });
+            return PartialView("CreateOrder", order);
         }
 
         [HttpGet]
@@ -38,22 +41,22 @@
             return PartialView("CreateOrder", order);
         }
 
-        public ActionResult BuyOrdersListView()
+        public ActionResult GetBuyOrders()
         {
             var list = _service.GetBuyOrders();
             return PartialView("ListOrders", list);
         }
 
-        public ActionResult SellOrdersListView()
+        public ActionResult GetSellOrders()
         {
             var list = _service.GetSellOrders();
             return PartialView("ListOrders", list);
         }
 
-        public ActionResult TradesHistoryView()
+        public ActionResult GetTradeHistory()
         {
             var list = _service.GetTradeHistory();
-            return PartialView("TradesHistoryView", list);
+            return PartialView("TradeHistory", list);
         }
 
     }

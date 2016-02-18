@@ -1,6 +1,12 @@
 ﻿@model IEnumerable<MvcApp.Models.Domain.Trade>
 
 
+@if (Model == null || !Model.Any())
+{
+    <div>There is no history</div>
+}
+else
+{
 <table>
     <tr>
         <td>Date</td>
@@ -23,6 +29,5 @@
             <td>@trade.SellOrder.Note</td>
         </tr>
     }
-
-
 </table>
+}
