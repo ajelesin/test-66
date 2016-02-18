@@ -21,6 +21,7 @@
 
         public DateTime Date { get; set; }
 
+        [EnumDataType(typeof(OrderType))]
         public OrderType OrderType { get; set; }
     }
 }

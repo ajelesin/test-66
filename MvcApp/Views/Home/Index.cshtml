@@ -2,26 +2,28 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<div class="modal"></div>
 <table>
     <tr>
-        <td>
-            <div><b>Buy Cake</b></div>
+        <td valign="top">
+            <div><b>Buy Cake</b>
+            </div>
             @Html.Action("CreateOrder", new {orderType = OrderType.Buy})
         </td>
-        <td>
-            <div><b>Sell Cake</b></div>
+        <td valign="top">
+            <div><b>Sell Cake</b>
+            </div>
             @Html.Action("CreateOrder", new {orderType = OrderType.Sell})
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="top">
             <div><b>Sell Orders</b></div>
             <div id="SellOrders">
                 @Html.Action("GetSellOrders")
             </div>
         </td>
-        <td>
+        <td valign="top">
             <div><b>Buy Orders</b></div>
             <div id="BuyOrders">
                 @Html.Action("GetBuyOrders")
@@ -29,7 +31,7 @@
         </td>
     </tr>
     <tr>
-        <td colspan="2">
+        <td colspan="2" valign="top">
             <div><b>Trade History</b></div>
             <div id="TradeHistory">
                 @Html.Action("GetTradeHistory")
@@ -37,39 +39,3 @@
         </td>
     </tr>
 </table>
-
-@section scripts
-{
-    <script src="~/signalr/hubs"></script>
-    <script type="text/javascript">
-        $(function() {
-            var service = $.connection.exchangeHub;
-            service.client.refresh = function () {
-                $.ajax({
-                    url: '/Home/GetSellOrders',
-                    dataType: 'html',
-                    success: function (data) {
-                        $('#SellOrders').html(data);
-                    }
-                });
-                $.ajax({
-                    url: '/Home/GetBuyOrders',
-                    dataType: 'html',
-                    success: function(data) {
-                        $('#BuyOrders').html(data);
-                    }
-                });
-                $.ajax({
-                    url: '/Home/GetTradeHistory',
-                    dataType: 'html',
-                    success: function (data) {
-                        $('#TradeHistory').html(data);
-                    }
-                });
-            }
-
-            $.connection.hub.start();
-
-        });
-    </script>
-}

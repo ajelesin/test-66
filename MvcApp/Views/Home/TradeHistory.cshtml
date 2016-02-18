@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<MvcApp.Models.Domain.Trade>
 
-
+@Html.ValidationSummary(true)
 @if (Model == null || !Model.Any())
 {
     <div>There is no history</div>
 }
 else
 {
-<table>
-    <tr>
+<table class="BorderedTable">
+    <tr style="text-align: center;">
         <td>Date</td>
         <td>Buy Date</td>
         <td>Sell Date</td>
@@ -18,16 +18,16 @@ else
         <td>Sell Note</td>
     </tr>
     @foreach (var trade in Model)
-    {
-        <tr>
-            <td>@trade.TradeDate</td>
-            <td>@trade.BuyOrder.Date</td>
-            <td>@trade.SellOrder.Date</td>
-            <td>@trade.Price</td>
-            <td>@trade.Amount</td>
-            <td>@trade.BuyOrder.Note</td>
-            <td>@trade.SellOrder.Note</td>
-        </tr>
-    }
+{
+    <tr style="text-align: center;">
+        <td>@trade.TradeDate</td>
+        <td>@trade.BuyOrder.Date</td>
+        <td>@trade.SellOrder.Date</td>
+        <td>@trade.Price</td>
+        <td>@trade.Amount</td>
+        <td>@trade.BuyOrder.Note</td>
+        <td>@trade.SellOrder.Note</td>
+    </tr>
+}
 </table>
 }

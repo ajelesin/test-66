@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<MvcApp.Models.Domain.Order>
 
+@Html.ValidationSummary(true)
 @if (Model == null || !Model.Any())
 {
     <div>There is no orders</div>

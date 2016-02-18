@@ -25,6 +25,10 @@
             bundles.Add(new ScriptBundle("~/bundles/signal").Include(
                 "~/Scripts/jquery.signalR*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                "~/Scripts/Views/CreateOrder.js",
+                "~/Scripts/Views/Index.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

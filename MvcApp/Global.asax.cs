@@ -18,7 +18,7 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Database.SetInitializer(new CreateDatabaseIfNotExists<ExchangeContext>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<ExchangeContext>());
         }
     }
 }

@@ -1,8 +1,16 @@
 ﻿@model MvcApp.Models.Domain.Order
+@{ var formId = string.Format("{0}OrderForm", Model.OrderType);}
+<div id="@formId">
 
-@using (Ajax.BeginForm("CreateOrder", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "OrderForm" }))
-{
-    <div id="@string.Format("{0}OrderForm", Model.OrderType)">
+    @using (Ajax.BeginForm("CreateOrder", new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = formId,
+        OnBegin = "onAjaxBegin",
+        OnComplete = "onAjaxComplete"
+    }))
+    {
         <table>
             <tr>
                 <td>
@@ -34,6 +42,10 @@
         </table>
 
         @Html.HiddenFor(o => o.OrderType)
+        @Html.ValidationSummary(true)
+
         <input type="submit" value="@Model.OrderType Cake"/>
-    </div>
-}
+
+
+    }
+</div>
