@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
+    using Infra;
     using Models.DataAccess;
 
     public class MvcApplication : System.Web.HttpApplication
@@ -18,7 +19,9 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Database.SetInitializer(new DropCreateDatabaseAlways<ExchangeContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<ExchangeContext>());
+            //Database.SetInitializer(new DropCreateDatabaseAlways<ExchangeContext>());
+            ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
         }
     }
 }

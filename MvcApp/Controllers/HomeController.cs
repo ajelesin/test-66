@@ -1,7 +1,6 @@
 ﻿namespace MvcApp.Controllers
 {
     using System;
-    using System.Threading;
     using System.Web.Mvc;
     using Connection;
     using Microsoft.AspNet.SignalR;
@@ -13,9 +12,8 @@
     {
         private readonly ExchangeService _service;
 
-        public HomeController()
+        public HomeController(IRepository repository)
         {
-            var repository = new SqlRepository();
             _service = new ExchangeService(repository);
         }
 
@@ -29,7 +27,6 @@
         {
             try
             {
-                //Thread.Sleep(1000);
                 if (ModelState.IsValid)
                 {
                     _service.ProcessOrder(order);
@@ -41,7 +38,7 @@
             catch (Exception ex)
             {
                 // log ex.ToString()
-                ModelState.AddModelError(string.Empty, "Sorry, we have some problems. Take a break and try again.");
+                ModelState.AddModelError(string.Empty, ex.ToString());
             }
             return PartialView("CreateOrder", order);
         }
@@ -49,7 +46,7 @@
         [HttpGet]
         public ActionResult CreateOrder(OrderType orderType)
         {
-            var order = new Order {OrderType = orderType};
+            var order = new Order { OrderType = orderType };
             return PartialView("CreateOrder", order);
         }
 
@@ -63,7 +60,7 @@
             catch (Exception ex)
             {
                 // log ex.ToString()
-                ModelState.AddModelError(string.Empty, "Sorry, we have some problems. Take a break and try again."); 
+                ModelState.AddModelError(string.Empty, ex.ToString());
             }
             return PartialView("ListOrders", null);
         }
@@ -78,7 +75,7 @@
             catch (Exception ex)
             {
                 // log ex.ToString()
-                ModelState.AddModelError(string.Empty, "Sorry, we have some problems. Take a break and try again.");
+                ModelState.AddModelError(string.Empty, ex.ToString());
             }
             return PartialView("ListOrders", null);
         }
@@ -93,7 +90,7 @@
             catch (Exception ex)
             {
                 // log ex.ToString()
-                ModelState.AddModelError(string.Empty, "Sorry, we have some problems. Take a break and try again.");
+                ModelState.AddModelError(string.Empty, ex.ToString());
             }
             return PartialView("TradeHistory", null);
         }

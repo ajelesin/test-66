@@ -50,7 +50,7 @@
             _repository.SaveChanges();
         }
 
-        private IEnumerable<Order> GetSuitableOrders(Order order)
+        private IEnumerable<Order> FindSuitableOrdersForMakingTrade(Order order)
         {
             if (order.OrderType == OrderType.Sell)
             {
@@ -73,7 +73,7 @@
 
         private void MakeTrades(Order newOrder)
         {
-            var suitableOrders = GetSuitableOrders(newOrder)
+            var suitableOrders = FindSuitableOrdersForMakingTrade(newOrder)
                 .ToList();
 
             if (suitableOrders.Count == 0)
